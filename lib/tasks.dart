@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:task_list/app.dart';
 
 class TasksPage extends StatelessWidget {
@@ -9,6 +10,7 @@ class TasksPage extends StatelessWidget {
   void _logout(BuildContext context) {
     Navigator.pushReplacementNamed(context, "/login");
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +28,34 @@ class TasksPage extends StatelessWidget {
         backgroundColor: Colors.red,
         child: Icon(Icons.add),
         onPressed: () => Navigator.pushNamed(context, '/newtask'),
+      ),
+      body: ListView(
+        children: [
+          // ListTile(
+          //   title: Text("task 1"),
+          //   subtitle: Text("Tall"),
+          //   trailing: Checkbox(value: false, onChanged: (_) {}),
+          // ),
+          Dismissible(
+            background: Container(color: Colors.red,),
+            onDismissed: (_){},
+            key: Key(
+              "Task2"
+            ),
+            child: CheckboxListTile(
+              title: Text("task 2"),
+              subtitle: Text("low"),
+              value: false,
+              onChanged: (_) {},
+            ),
+          ),
+          CheckboxListTile(
+            title: Text("task 3"),
+            subtitle: Text("medium"),
+            value: false,
+            onChanged: (_) {},
+          ),
+        ],
       ),
     );
   }
