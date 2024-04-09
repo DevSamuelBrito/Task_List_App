@@ -29,13 +29,13 @@ class LoginPage extends StatelessWidget {
               ),
               ElevatedButton(
                 child: Text("Sign In"),
-                onPressed: () {},
+                onPressed: () => Navigator.pushReplacementNamed(context,'/tasks'),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/register');
                 },
-                child: Text("novo usuário"),
+                child: Text("New User"),
               ),
             ],
           ),

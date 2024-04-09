@@ -10,6 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,//tirar a faixa de debug
       theme: ThemeData.light(
         useMaterial3: false,
         // primarySwatch: Colors.amber,

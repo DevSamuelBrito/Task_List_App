@@ -5,6 +5,18 @@ class NewTasksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("New Tasks"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context,"/tasks");
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
+    );
   }
 }
