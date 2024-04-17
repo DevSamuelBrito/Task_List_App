@@ -11,6 +11,7 @@ const firebaseConfig = FirebaseOptions(
     appId: "1:280767043565:web:37f1b64331b882f4f479e4");
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();//aguardando flutter carregar para carregar o firebase
   Firebase.initializeApp(options: firebaseConfig);
   runApp(const App());
 }
