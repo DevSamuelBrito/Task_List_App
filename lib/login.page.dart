@@ -17,7 +17,13 @@ class LoginPage extends StatelessWidget {
       );
       Navigator.pushReplacementNamed(context, '/tasks');
     } on FirebaseAuthException catch (ex) {
-      print(ex.message);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Dados invalidos'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 5),
+        ),
+      );
     }
   }
 
