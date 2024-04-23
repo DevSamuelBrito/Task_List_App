@@ -1,4 +1,5 @@
 import 'dart:js';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:task_list/app.dart';
@@ -10,8 +11,11 @@ class TasksPage extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
 
   void _logout(BuildContext context) {
+    FirebaseAuth.instance.signOut();
     Navigator.pushReplacementNamed(context, "/login");
   }
+
+  final firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
