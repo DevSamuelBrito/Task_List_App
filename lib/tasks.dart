@@ -36,7 +36,10 @@ class TasksPage extends StatelessWidget {
         onPressed: () => Navigator.pushNamed(context, '/newtask'),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: firestore.collection('tasks').snapshots(),
+          stream: firestore
+              .collection('tasks')
+              .orderBy('finished', descending: false)
+              .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return const CircularProgressIndicator();
@@ -46,19 +49,21 @@ class TasksPage extends StatelessWidget {
 
             return ListView(
               children: docs
-                  .map((doc) => Dismissible(
-                        background: Container(
-                          color: Colors.red,
-                        ),
-                        onDismissed: (_) {},
-                        key: Key(doc.id),
-                        child: CheckboxListTile(
-                          title: Text(doc['name']),
-                          subtitle: Text("low"),
-                          value: doc['finished'],
-                          onChanged: (_) {},
-                        ),
-                      ))
+                  .map(
+                    (doc) => Dismissible(
+                      background: Container(
+                        color: Colors.red,
+                      ),
+                      onDismissed: (_) => doc.reference.delete(),
+                      key: Key(doc.id),
+                      child: CheckboxListTile(
+                        title: Text(doc['name']),
+                        subtitle: Text("low"),
+                        value: doc['finished'],
+                        onChanged: (value) => doc.reference.update({'finished':value}),
+                      ),
+                    ),
+                  )
                   .toList(),
             );
           }),
