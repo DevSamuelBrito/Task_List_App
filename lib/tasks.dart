@@ -17,7 +17,7 @@ class TasksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello ${user.email}"),
+        title: Text("Hello ${user.displayName}"),
         actions: [
           IconButton(
             onPressed: () => _logout(context),
