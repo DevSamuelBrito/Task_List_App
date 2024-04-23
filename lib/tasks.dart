@@ -35,34 +35,33 @@ class TasksPage extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: () => Navigator.pushNamed(context, '/newtask'),
       ),
-      body: ListView(
-        children: [
-          // ListTile(
-          //   title: Text("task 1"),
-          //   subtitle: Text("Tall"),
-          //   trailing: Checkbox(value: false, onChanged: (_) {}),
-          // ),
-          Dismissible(
-            background: Container(color: Colors.red,),
-            onDismissed: (_){},
-            key: Key(
-              "Task2"
-            ),
-            child: CheckboxListTile(
-              title: Text("task 2"),
-              subtitle: Text("low"),
-              value: false,
-              onChanged: (_) {},
-            ),
-          ),
-          CheckboxListTile(
-            title: Text("task 3"),
-            subtitle: Text("medium"),
-            value: false,
-            onChanged: (_) {},
-          ),
-        ],
-      ),
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: firestore.collection('tasks').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const CircularProgressIndicator();
+            }
+
+            var docs = snapshot.data!.docs;
+
+            return ListView(
+              children: docs
+                  .map((doc) => Dismissible(
+                        background: Container(
+                          color: Colors.red,
+                        ),
+                        onDismissed: (_) {},
+                        key: Key(doc.id),
+                        child: CheckboxListTile(
+                          title: Text(doc['name']),
+                          subtitle: Text("low"),
+                          value: doc['finished'],
+                          onChanged: (_) {},
+                        ),
+                      ))
+                  .toList(),
+            );
+          }),
     );
   }
 }
