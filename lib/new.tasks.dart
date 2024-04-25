@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class NewTasksPage extends StatelessWidget {
@@ -15,6 +16,7 @@ class NewTasksPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("New Tasks"),
+        backgroundColor: Colors.red,
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -35,6 +37,10 @@ class NewTasksPage extends StatelessWidget {
                 child: ElevatedButton(
                   child: Text("Save"),
                   onPressed: () => _onSaved(context),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red),
+                  ),
                 ),
               ),
             ],
