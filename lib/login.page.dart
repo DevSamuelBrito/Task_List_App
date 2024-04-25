@@ -56,12 +56,18 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 child: Text("Sign In"),
                 onPressed: () => _signIn(context),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/register');
                 },
-                child: Text("New User"),
+                child: Text(
+                  "New User",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),
