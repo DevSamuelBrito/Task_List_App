@@ -38,7 +38,8 @@ class TasksPage extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: firestore
               .collection('tasks')
-              .orderBy('finished', descending: false)
+              .where('uid',isEqualTo: user.uid)
+              .orderBy('finished')
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
