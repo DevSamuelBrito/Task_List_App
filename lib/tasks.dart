@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class TasksPage extends StatelessWidget {
   TasksPage({super.key});
-
+  
   final user = FirebaseAuth.instance.currentUser!;
 
   void _logout(BuildContext context) {

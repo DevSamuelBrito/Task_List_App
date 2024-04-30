@@ -1,13 +1,21 @@
 import 'dart:js';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewTasksPage extends StatelessWidget {
-  const NewTasksPage({super.key});
+  final txtName = TextEditingController();
 
   void _onSaved(BuildContext context) {
+    FirebaseFirestore.instance.collection('tasks').add(
+      {
+        'name': txtName.text,
+        'finished': false,
+      },
+    );
     Navigator.pop(context);
   }
 
@@ -24,6 +32,7 @@ class NewTasksPage extends StatelessWidget {
           child: Column(
             children: [
               TextField(
+                controller: txtName,
                 minLines: 1,
                 maxLines: 5,
                 decoration: InputDecoration(
